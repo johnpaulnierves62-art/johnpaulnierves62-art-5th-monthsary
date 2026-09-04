@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff4f81">
+<title>5 Months With You ❤️</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Poppins,Arial,sans-serif;
+  background:#12080d;color:#fff;overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(255,94,145,.24),transparent 28%),
+    radial-gradient(circle at 85% 70%,rgba(255,177,199,.12),transparent 30%),
+    linear-gradient(145deg,#16080e,#3b101f 48%,#13070c);
+}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:30}
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.heart{position:absolute;bottom:-40px;animation:rise linear forwards;opacity:.85}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+
+#intro{
+  position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle,#641a35,#17070d 65%);transition:1s;
+}
+.intro-box{text-align:center;padding:25px}
+.intro-box h1{font-family:"DM Serif Display",serif;font-size:clamp(34px,10vw,65px);font-weight:400}
+.intro-box p{margin:10px 0 28px;color:#ffdbe6}
+.envelope{
+  width:min(310px,82vw);height:190px;margin:auto;position:relative;
+  background:#f9d7e1;border-radius:12px;box-shadow:0 25px 70px #0008;cursor:pointer;
+  transition:.5s;perspective:700px;
+}
+.envelope:before{
+  content:"";position:absolute;inset:0;border-radius:12px;
+  border-left:155px solid transparent;border-right:155px solid transparent;
+  border-top:105px solid #ff7297;transform-origin:top;transition:1s;z-index:3;
+}
+.envelope.open:before{transform:rotateX(180deg)}
+.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:46px;z-index:4}
+.tap{margin-top:20px;font-size:14px;animation:pulse 1.5s infinite}
+@keyframes pulse{50%{opacity:.45}}
+
+main{display:none;opacity:0;transition:1s}
+section{min-height:100vh;padding:80px 20px;display:flex;align-items:center;justify-content:center}
+.wrap{width:min(900px,100%);text-align:center}
+.badge{display:inline-block;padding:8px 15px;border:1px solid #ffffff38;border-radius:99px;background:#ffffff0d;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+h1,h2{font-family:"DM Serif Display",serif;font-weight:400}
+.hero h1{font-size:clamp(52px,13vw,110px);line-height:.95;margin:22px 0}
+.hero h1 span{color:#ff8eb0}
+.hero p{color:#f9d9e2;font-size:16px}
+.scroll{margin-top:45px;opacity:.6;font-size:12px}
+
+.card{
+  background:#ffffff0d;border:1px solid #ffffff20;border-radius:28px;padding:30px;
+  backdrop-filter:blur(14px);box-shadow:0 20px 70px #0005;
+}
+.card h2{font-size:clamp(34px,8vw,58px);margin-bottom:12px}
+.message{max-width:680px;margin:auto;color:#ffeaf0;line-height:1.9;font-size:15px;min-height:230px}
+#typed:after{content:"|";animation:blink .8s infinite}
+@keyframes blink{50%{opacity:0}}
+
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:25px}
+.time{background:#0004;border-radius:18px;padding:17px 7px}
+.time b{display:block;font-size:30px}.time small{font-size:10px;color:#ffcbd8;text-transform:uppercase}
+
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:25px}
+.gallery img{width:100%;height:260px;object-fit:cover;border-radius:18px;cursor:pointer;transition:.4s}
+.gallery img:hover{transform:scale(1.02)}
+
+.slideshow{position:relative;margin:25px auto 0;max-width:560px}
+.slideshow img{width:100%;height:420px;object-fit:cover;border-radius:22px;box-shadow:0 20px 60px #0007}
+.caption{margin-top:12px;color:#ffd9e4;font-size:13px}
+
+.btn{
+  border:0;border-radius:99px;padding:14px 24px;margin:18px 7px 0;
+  background:#ff6f96;color:white;font:600 14px Poppins;cursor:pointer;
+  box-shadow:0 10px 30px #ff4f8160;transition:.25s
+}
+.btn:hover{transform:translateY(-2px) scale(1.03)}
+.btn.secondary{background:#ffffff15;border:1px solid #ffffff25}
+#answer{font-family:"DM Serif Display",serif;font-size:34px;margin-top:25px;color:#ffabc2;min-height:45px}
+.secret{display:none;margin-top:25px;padding:25px;border-radius:20px;background:#ff4f8115;border:1px solid #ff8eac45}
+.secret p{line-height:1.8;color:#ffe5ed}
+
+footer{text-align:center;padding:40px 20px 70px;color:#d9aab9;font-size:12px}
+
+@media(max-width:600px){
+  section{padding:65px 16px}
+  .counter{grid-template-columns:repeat(2,1fr)}
+  .gallery img{height:210px}
+  .slideshow img{height:380px}
+  .card{padding:22px}
+}
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+<canvas id="fireworks"></canvas>
+
+<div id="intro">
+  <div class="intro-box">
+    <h1>For Jarzel ❤️</h1>
+    <p>A little surprise for our 5th monthsary...</p>
+    <div class="envelope" id="envelope">
+      <div class="seal">💌</div>
+    </div>
+    <div class="tap">Tap the envelope to open</div>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="badge">September 19, 2026</span>
+    <h1>5 months.<br><span>One love.</span></h1>
+    <p>Happy 5th Monthsary, Jarzel. 🫶🏻</p>
+    <div class="scroll">↓ scroll for our little story ↓</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card">
+      <h2>Our time together</h2>
+      <p style="color:#eecbd5">Since April 19, 2026 ❤️</p>
+      <div class="counter">
+        <div class="time"><b id="days">0</b><small>Days</small></div>
+        <div class="time"><b id="hours">0</b><small>Hours</small></div>
+        <div class="time"><b id="mins">0</b><small>Minutes</small></div>
+        <div class="time"><b id="secs">0</b><small>Seconds</small></div>
+      </div>
+      <p style="margin-top:20px;color:#dcaebb;font-size:12px">Counting every moment until September 19, 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card">
+      <span class="badge">A letter for you</span>
+      <h2 style="margin:18px 0">Dear Jarzel,</h2>
+      <div class="message"><span id="typed"></span></div>
+      <button class="btn" onclick="replayLetter()">Read it again 💌</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card">
+      <span class="badge">Our memories</span>
+      <h2 style="margin:18px 0">A few moments I love ❤️</h2>
+      <div class="gallery">
+        <img src="photo1.jpg" alt="Memory 1">
+        <img src="photo2.jpg" alt="Memory 2">
+        <img src="photo3.jpg" alt="Memory 3">
+        <img src="photo4.jpg" alt="Memory 4">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card">
+      <span class="badge">Our little slideshow</span>
+      <h2 style="margin:18px 0">If I could pause time...</h2>
+      <div class="slideshow">
+        <img id="slide" src="photo1.jpg" alt="Our memory">
+        <div class="caption" id="caption">One of my favorite memories with you.</div>
+      </div>
+      <button class="btn secondary" onclick="prevSlide()">←</button>
+      <button class="btn secondary" onclick="nextSlide()">→</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card">
+      <h2>Will you stay with me? 🥺</h2>
+      <p style="color:#f0cbd5;line-height:1.8">
+        Through the good days, bad days, random laughs, little arguments,
+        adventures, and everything in between...
+      </p>
+      <button class="btn" onclick="yes()">YES, OF COURSE ❤️</button>
+      <button class="btn secondary" onclick="yes()">ALWAYS 🥹</button>
+      <div id="answer"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card">
+      <span class="badge">One last thing...</span>
+      <h2 style="margin:18px 0">I have a surprise for you ❤️</h2>
+      <p style="color:#f1ccd7;line-height:1.8">
+        You made these five months more special than I could explain.
+        So here's the most important part...
+      </p>
+      <button class="btn" onclick="reveal()">Open my heart 💗</button>
+      <div class="secret" id="secret">
+        <p>
+          Jarzel, I don't just want five months with you.
+          I want more mornings, more sunsets, more silly pictures,
+          more adventures, more memories, and more reasons to choose you.
+          <br><br>
+          Thank you for being part of my life.
+          <br><br>
+          <strong>Happy 5th Monthsary, my love. ❤️</strong>
+          <br>
+          Here's to us — and to many more months together. 🥂
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Made with love, just for Jarzel ❤️</footer>
+</main>
+
+<script>
+const startDate = new Date("2026-04-19T00:00:00");
+const anniversary = new Date("2026-09-19T00:00:00");
+
+const letter = `Five months ago, something beautiful began.
+
+Since then, you've given me so many moments that I never want to forget. The laughs, the random conversations, the little memories, the pictures, and even the simple moments when we're just together.
+
+I may not always know the perfect words to say, but I hope you know how much you mean to me.
+
+Thank you for choosing me, for staying, and for being someone I can share my days with.
+
+Five months down, and I hope this is only the beginning.
+
+Happy 5th monthsary, Jarzel. ❤️
+
+I love you.`;
+
+let typingTimer;
+function typeLetter(){
+  clearInterval(typingTimer);
+  const el=document.getElementById("typed");
+  el.textContent="";
+  let i=0;
+  typingTimer=setInterval(()=>{
+    el.textContent=letter.slice(0,i++);
+    if(i>letter.length) clearInterval(typingTimer);
+  },28);
+}
+function replayLetter(){typeLetter();}
+
+function updateCounter(){
+  const now=new Date();
+  const target=now<anniversary?anniversary:now;
+  if(now<anniversary){
+    let diff=target-now;
+    document.getElementById("days").textContent=Math.floor(diff/86400000);
+    diff%=86400000;
+    document.getElementById("hours").textContent=Math.floor(diff/3600000);
+    diff%=3600000;
+    document.getElementById("mins").textContent=Math.floor(diff/60000);
+    diff%=60000;
+    document.getElementById("secs").textContent=Math.floor(diff/1000);
+  }else{
+    let diff=now-startDate;
+    document.getElementById("days").textContent=Math.floor(diff/86400000);
+    diff%=86400000;
+    document.getElementById("hours").textContent=Math.floor(diff/3600000);
+    diff%=3600000;
+    document.getElementById("mins").textContent=Math.floor(diff/60000);
+    diff%=60000;
+    document.getElementById("secs").textContent=Math.floor(diff/1000);
+  }
+}
+setInterval(updateCounter,1000); updateCounter();
+
+const images=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+const captions=[
+  "One of my favorite memories with you. ❤️",
+  "You look beautiful without even trying. 🌊",
+  "A moment I wish I could keep forever. 🥹",
+  "Us being us. My favorite kind of memory. 💕"
+];
+let slideIndex=0;
+function showSlide(){
+  document.getElementById("slide").src=images[slideIndex];
+  document.getElementById("caption").textContent=captions[slideIndex];
+}
+function nextSlide(){slideIndex=(slideIndex+1)%images.length;showSlide();}
+function prevSlide(){slideIndex=(slideIndex-1+images.length)%images.length;showSlide();}
+setInterval(nextSlide,4500);
+
+function heart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.textContent=["❤️","💗","💕","💖","💓","♡"][Math.floor(Math.random()*6)];
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(14+Math.random()*24)+"px";
+  h.style.animationDuration=(5+Math.random()*5)+"s";
+  document.getElementById("hearts").appendChild(h);
+  setTimeout(()=>h.remove(),10000);
+}
+setInterval(heart,450);
+
+const canvas=document.getElementById("fireworks"),ctx=canvas.getContext("2d");
+let particles=[];
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+addEventListener("resize",resize);resize();
+function burst(x,y){
+  for(let i=0;i<70;i++){
+    const a=Math.random()*Math.PI*2,s=Math.random()*7+2;
+    particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:80});
+  }
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.life--;
+    ctx.globalAlpha=Math.max(p.life/80,0);
+    ctx.fillStyle="#ff9fba";
+    ctx.fillRect(p.x,p.y,3,3);
+    if(p.life<=0)particles.splice(i,1);
+  });
+  ctx.globalAlpha=1;requestAnimationFrame(animate);
+}
+animate();
+
+function yes(){
+  document.getElementById("answer").textContent="Then it's you and me. Always. ❤️";
+  for(let i=0;i<5;i++)setTimeout(()=>burst(innerWidth*Math.random(),innerHeight*.35+Math.random()*innerHeight*.3),i*250);
+  for(let i=0;i<30;i++)setTimeout(heart,i*40);
+}
+
+function reveal(){
+  document.getElementById("secret").style.display="block";
+  for(let i=0;i<7;i++)setTimeout(()=>burst(innerWidth*.2+Math.random()*innerWidth*.6,innerHeight*.25+Math.random()*innerHeight*.5),i*300);
+  for(let i=0;i<50;i++)setTimeout(heart,i*35);
+}
+
+document.getElementById("envelope").addEventListener("click",()=>{
+  document.getElementById("envelope").classList.add("open");
+  setTimeout(()=>{
+    document.getElementById("intro").style.opacity="0";
+    setTimeout(()=>{
+      document.getElementById("intro").style.display="none";
+      const main=document.getElementById("main");
+      main.style.display="block";
+      setTimeout(()=>main.style.opacity="1",30);
+      typeLetter();
+    },900);
+  },900);
+});
+</script>
+</body>
+</html>
